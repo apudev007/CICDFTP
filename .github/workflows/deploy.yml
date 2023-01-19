@@ -1,4 +1,4 @@
-name: Deploy to FTP server
+name: Deploy to cPanel
 
 on:
   push:
@@ -6,28 +6,17 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Zip code
-      run: zip -r code.zip .
-    - name: Upload artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: code.zip
-        path: code.zip
-  deploy:
-    runs-on: self-hosted
-    needs: build
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: code.zip
-    - name: Unzip code
-      run: unzip code.zip
-    - name: Deploy to FTP
+
+    - name: Deploy to cPanel
+      env:
+        FTP_HOST: ftp.wpdemo2.com
+        FTP_USER: ${{secrets.FTP_USERNAME}}
+        FTP_PASSWORD: ${{secrets.FTP_PASSWORD}}
       run: |
-        ftp-upload -h ${{ secrets.FTP_SERVER }} -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} -d /public_html/new/ -l code
+        lftp -c "set ftp:ssl-allow no; open -u $FTP_USER,$FTP_PASSWORD $FTP_HOST; mirror -R -e -v --ignore-time --parallel=10 --no-perms ." public_html/new"
