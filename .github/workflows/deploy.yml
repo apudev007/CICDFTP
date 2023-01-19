@@ -30,4 +30,4 @@ jobs:
       run: unzip code.zip
     - name: Deploy to FTP
       run: |
-        ftp-upload -h ${{ secrets.FTP_SERVER }} -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} -d /home/wpdemo2c/wpdemo2.com/cicdtest/ -l code
+        ftp-upload -h ${{ secrets.FTP_SERVER }} -u ${{ secrets.FTP_USERNAME }} -p ${{ secrets.FTP_PASSWORD }} -d /wpdemo2.com/cicdtest/ -l code
