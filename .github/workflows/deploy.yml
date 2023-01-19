@@ -13,9 +13,9 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: ftp-action
-      uses: sebastianpopp/ftp-action@v2.0.0
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
-        host: wpdemo2.com
-        user: wpdemo2c
+        server: ftp.wpdemo2.com
+        username: wpdemo2c
         password: 612m171c83DX_3p
-        remoteDir: public_html/new
+        server-dir: ./public_html/new/
