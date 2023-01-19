@@ -15,7 +15,7 @@ jobs:
     - name: ftp-action
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
-        server: ftp.wpdemo2.com
-        username: wpdemo2c
-        password: 612m171c83DX_3p
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
         server-dir: ./public_html/new/
