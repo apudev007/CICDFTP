@@ -15,6 +15,6 @@ jobs:
     - name: Deploy to FTP
       uses: tomato4/ftp-action@v3.0.0
       with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
+        host: wpdemo2.com
+        user: wpdemo2c
+        password: 612m171c83DX_3p
